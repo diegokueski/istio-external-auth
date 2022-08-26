@@ -1,0 +1,28 @@
+image:
+ repository: "quay.io/oauth2-proxy/oauth2-proxy"
+ tag: "v7.0.1"
+ pullPolicy: "IfNotPresent"
+
+config:
+  clientID: "<CLIENT_ID>"
+  clientSecret: "<CLIENT_SECRET>"
+  cookieSecret: "<COOKIE_SECRET>"
+
+  configFile: |-
+    provider_display_name = "Okta"
+    email_domains = [ "*" ]
+
+extraArgs:
+  provider: oidc
+  cookie-secure: false
+  oidc-issuer-url: https://<SUB_DOMAIN>.oktapreview.com
+  redirect-url: https://<MY_OAUTH2_PROXY_DOMAIN>/oauth2/callback
+  upstream: static://200
+  scope: "openid email"
+  cookie-samesite: lax
+  cookie-refresh: 1h
+  cookie-expire: 4h
+  skip-provider-button: true
+
+metrics:
+ enabled: false

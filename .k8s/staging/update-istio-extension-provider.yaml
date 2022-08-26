@@ -1,0 +1,13 @@
+data:
+  mesh: |-
+    # Add the following content to define the external authorizers.
+    extensionProviders:
+    - name: "sample-ext-authz-grpc"
+      envoyExtAuthzGrpc:
+        service: "ext-authz.foo.svc.cluster.local"
+        port: "9000"
+    - name: "sample-ext-authz-http"
+      envoyExtAuthzHttp:
+        service: "ext-authz.foo.svc.cluster.local"
+        port: "8000"
+        includeRequestHeadersInCheck: ["x-ext-authz"]

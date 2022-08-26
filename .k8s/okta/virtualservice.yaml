@@ -1,0 +1,28 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: dummy-service
+  namespace: dummy-service
+spec:
+  hosts:
+    - dummy-service.local.com
+  gateways:
+    - dummy-service
+  http:
+    - match:
+        - uri:
+            prefix: /app
+      route:
+        - destination:
+            host: dummy-service
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: /oauth2
+      route:
+        - destination:
+            host: oauth2-proxy
+            port:
+              number: 80

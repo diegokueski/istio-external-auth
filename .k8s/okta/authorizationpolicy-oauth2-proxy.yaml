@@ -1,0 +1,16 @@
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: oauth2-proxy
+  namespace: dummy-service
+spec:
+  selector:
+    matchLabels:
+      app: oauth2-proxy
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            remoteIpBlocks: 
+              - "0.0.0.0"

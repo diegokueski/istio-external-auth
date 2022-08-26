@@ -1,0 +1,23 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: auth-policy-okta-provider
+  namespace: dummy-service
+spec:
+  action: CUSTOM
+  selector:
+    matchLabels:
+      app: dummy-service
+  provider:
+    name: "oauth2-proxy"
+  rules:
+  - to:
+    - operation:
+        paths: ["/app*"]  
+  # rules:
+  # - to:
+  #   - operation:
+  #       hosts:
+  #       - "dummy-service.local.com"
+  #       # Uncomment if authorization requried base on path match
+  #       paths: ["/app"]  
